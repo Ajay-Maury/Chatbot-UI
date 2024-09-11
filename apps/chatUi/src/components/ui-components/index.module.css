@@ -1,0 +1,198 @@
+.label {
+  text-align: left;
+  font-family: Segoe-regular;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 24px;
+  text-align: left;
+  color: #333f51;
+  margin-bottom: 6px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.inputField {
+  border: 1px solid #d5dae1;
+  padding: 7px;
+  width: 100%;
+  border-radius: 5px;
+}
+
+.inputField::placeholder {
+  font-family: Segoe-regular;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 21.28px;
+  text-align: left;
+  color: #8896ab;
+}
+
+.inputField:active,
+.inputField:focus {
+  outline: none;
+}
+
+.btnFill {
+  padding: 7px;
+  width: 100%;
+  background-color: #2b4078;
+  color: #ffffff;
+  border-radius: 8px;
+  font-family: Segoe-regular;
+  font-size: 17px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.btnFill:disabled {
+  /* Apply your desired styles */
+  opacity: 0.5; /* Example: reduce opacity to visually indicate it's disabled */
+  cursor: not-allowed; /* Change cursor to indicate it's not clickable */
+  /* You can add more styles here as needed */
+}
+
+.btnFill:active {
+  opacity: 0.6;
+}
+
+.LinkedInBtn {
+  padding: 7px;
+  width: 100%;
+  background-color: #0865c4;
+  color: #ffffff;
+  border-radius: 8px;
+  font-family: Segoe-regular;
+  font-size: 17px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.pinInputContainer {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+/* image upload */
+
+.imgInputContainer {
+  border-radius: 8px;
+  border: 1.5px dashed var(--Color-1, #2b4078);
+  background: rgba(236, 240, 245, 0.2);
+  padding: 15px;
+}
+
+/* phone number input */
+
+.phoneInputContainer input {
+  border: none;
+}
+
+.phoneInputContainer input:active,
+.phoneInputContainer input:focus {
+  outline: none;
+  border: none;
+}
+
+/* video upload component */
+
+.uploadedSuccessText {
+  font-family: Segoe-regular;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 21.28px;
+  text-align: left;
+  color: #007746;
+  margin-right: 10px;
+}
+
+.uploadedFailText {
+  font-family: Segoe-regular;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 21.28px;
+  text-align: left;
+  color: #ee6c4d;
+  margin-right: 10px;
+}
+
+/* percentage button */
+
+.percentageButton {
+  height: 50px;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  overflow: hidden;
+  border: 1px solid #007746;
+  position: relative;
+  margin: 0px;
+}
+
+.percentageBar {
+  height: 100%;
+  background-color: #d4ebe1;
+  transition: width 0.5s ease;
+}
+
+.percentageText {
+  color: #007746;
+  z-index: 2;
+  color: #50b089;
+  font-family: Segoe-regular;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* sign out btn */
+
+.signoutBtn:active {
+  opacity: 0.6;
+}
+
+.skipBtnContainer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.skipBtn {
+  font-family: Segoe-regular;
+  color: #ff476a;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  margin-right:20px;
+  border: 1px solid #ff476a;
+  border-radius:6px;
+  padding:4px 6px 6px 6px
+}
+
+.skipBtn:disabled{
+  opacity: 0.6;
+}
+
+.skipBtn:active {
+  opacity: 0.6;
+}
+
+.mobilePopupHeading{
+  font-family: Segoe-regular;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 38px;
+  text-align: center;
+  color: #2b4078;
+}
+
+.mobilePopupText{
+    font-family: Segoe-regular;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 18px;
+    text-align: center;
+    color: #333f51;
+    margin-bottom: 30px;
+}

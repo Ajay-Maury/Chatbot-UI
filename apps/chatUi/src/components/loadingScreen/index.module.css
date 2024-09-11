@@ -1,0 +1,47 @@
+/* Spinner styles */
+.spinnerCircle {
+  height: 5rem; /* equivalent to h-20 in Tailwind */
+  width: 5rem; /* equivalent to w-20 in Tailwind */
+  border-bottom: 0.5rem solid #F7FAFD; /* equivalent to border-b-8 in Tailwind */
+  border-top: 0.5rem solid #F7FAFD; /* equivalent to border-t-8 in Tailwind */
+  border-radius: 50%; /* equivalent to rounded-full in Tailwind */
+}
+
+.spinnerSpinner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 5rem; /* equivalent to h-20 in Tailwind */
+  width: 5rem; /* equivalent to w-20 in Tailwind */
+  border-bottom: 0.5rem solid #2B4078; /* equivalent to border-b-8 in Tailwind */
+  border-top: 0.5rem solid #2B4078; /* equivalent to border-t-8 in Tailwind */
+  border-radius: 50%; /* equivalent to rounded-full in Tailwind */
+  animation: spin 1s linear infinite; /* equivalent to animate-spin in Tailwind */
+}
+
+/* Animation for spinner */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Text styles */
+.text-lg {
+  font-size: 1.125rem; /* equivalent to text-lg in Tailwind */
+}
+
+.font-semibold {
+  font-weight: 600; /* equivalent to font-semibold in Tailwind */
+}
+
+.text-gray-600 {
+  color: #4b5563; /* equivalent to text-gray-600 in Tailwind */
+}
+
+.mt-4 {
+  margin-top: 1rem; /* equivalent to mt-4 in Tailwind */
+}

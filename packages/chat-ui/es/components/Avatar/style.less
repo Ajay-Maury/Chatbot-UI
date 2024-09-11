@@ -1,0 +1,29 @@
+.Avatar {
+  display: inline-block;
+  overflow: hidden;
+  border: 1px solid #6881C5;
+    padding: 11px 5px;
+    border-radius: 8px;
+    margin-top: 11px;
+
+  img {
+    display: block;
+    width: 30px;
+    height: 18px;
+    object-fit: cover;
+  }
+}
+
+.Avatar--sm img {
+  width: @avatar-size-sm;
+  height: @avatar-size-sm;
+}
+
+.Avatar--lg img {
+  width: @avatar-size-lg;
+  height: @avatar-size-lg;
+}
+
+.Avatar--square {
+  border-radius: @avatar-square-border-radius;
+}

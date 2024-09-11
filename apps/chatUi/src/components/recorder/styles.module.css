@@ -1,0 +1,171 @@
+.center {
+  display: block;
+  justify-content: center;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  background: #273388;
+  padding: 8px;
+}
+.centerAudio {
+  display: flex;
+  justify-content: center;
+}
+
+.center1 {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  background-color: #273388;
+  text-align: center;
+  padding: 20px;
+  margin: auto;
+}
+
+.audioText {
+  font-family: Roboto-regular;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0.01em;
+  text-align: center;
+  margin: 20px;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: end;
+  gap: 10px;
+  margin-top: 50px;
+  color: #273388;
+}
+
+.buttonContainer button {
+  cursor: pointer;
+}
+
+.buttonContainer button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.recorderContainer {
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width:100%;
+}
+
+.timerContainer {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.waveContainer {
+  height: 50px;
+  display: flex;
+  align-items: center;
+}
+
+.wave {
+  height: 0px;
+  width: 3px;
+  border-radius: 12px;
+  background-color: black;
+  display: inline-block;
+  margin: 0px 6px;
+  color: black;
+  animation: waveloader 1s infinite linear alternate;
+}
+
+.wave:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.wave:nth-child(2) {
+  animation-delay: 0.5s;
+}
+
+.wave:nth-child(3) {
+  animation-delay: 1s;
+}
+
+.wave:nth-child(4) {
+  animation-delay: 1.5s;
+}
+
+.wave:nth-child(5) {
+  animation-delay: 2s;
+}
+
+.wave:nth-child(6) {
+  animation-delay: 2.5s;
+}
+
+.wave:nth-child(7) {
+  animation-delay: 3s;
+}
+
+.wave:nth-child(8) {
+  animation-delay: 3.5s;
+}
+
+.wave:nth-child(9) {
+  animation-delay: 4s;
+}
+
+.wave:nth-child(10) {
+  animation-delay: 4.5s;
+}
+
+.wave:nth-child(11) {
+  animation-delay: 5s;
+}
+
+.wave:nth-child(12) {
+  animation-delay: 5.5s;
+}
+
+.wave:nth-child(13) {
+  animation-delay: 6s;
+}
+
+.wave:nth-child(14) {
+  animation-delay: 6.5s;
+}
+
+.wave:nth-child(15) {
+  animation-delay: 7s;
+}
+
+.wave:nth-child(16) {
+  animation-delay: 7.5s;
+}
+
+.wave:nth-child(17) {
+  animation-delay: 8s;
+}
+
+.wave:nth-child(18) {
+  animation-delay: 8.5s;
+}
+
+.wave:nth-child(19) {
+  animation-delay: 9s;
+}
+
+.wave:nth-child(20) {
+  animation-delay: 9.5s;
+}
+
+@keyframes waveloader {
+  to {
+    height: 50px;
+  }
+}
+
+.opacity:active {
+  opacity: 0.6;
+}

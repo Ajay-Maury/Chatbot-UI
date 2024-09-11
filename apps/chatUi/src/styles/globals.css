@@ -1,0 +1,249 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+@font-face {
+  font-family: Roboto-regular;
+  src: url("../assets/fonts/Roboto-Regular.ttf");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Roboto-medium;
+  src: url("../assets/fonts/Roboto-Medium.ttf");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Roboto-bold;
+  src: url("../assets/fonts/Roboto-Bold.ttf");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: NotoSans-Regular;
+  src: url("../assets/fonts/NotoSans-Regular.ttf");
+  font-display: swap;
+}
+
+.font-regular {
+  font-family: Roboto-regular !important;
+}
+.font-bold {
+  font-family: Roboto-bold !important;
+}
+
+@font-face {
+  font-family: segoe-Regular;
+  src: url("../assets/fonts/Segoe-UI.ttf");
+  font-display: swap;
+}
+
+.font-regular {
+  font-family: Segoe-regular !important;
+}
+
+@font-face {
+  font-family: segoe-bold;
+  src: url("../assets/fonts/Segoe-UI-Bold.ttf");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: ShipporiAntiqueB1-regular;
+  src: url("../assets/fonts/ShipporiAntiqueB1-Regular.ttf");
+  font-display: swap;
+}
+
+.font-regular {
+  font-family: Segoe-regular !important;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  scrollbar-color: #e0e0e0;
+}
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px #e0e0e0;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: #79747e;
+  border-radius: 10px;
+}
+
+:root {
+  --font: #000000b5;
+  --lightgrey: #d0d0d0;
+  --grey: #828282;
+  --darkgrey: #333232;
+  --primary: #f5952e;
+  --primarygreen: #d2f4e0;
+  --secondarygreen: #1e6231;
+  --tertiarygreen: #003a00;
+  --font: #000000b5;
+  --grey: #d0d0d0;
+  --darkgrey: #333232;
+  --primarydarkblue: #b99825;
+  --darkblue: #080664;
+  --tertiarydarkblue: #242631;
+  --primarygreen: #d2f4e0;
+  --secondary: #b99825;
+  --tertiarygreen: #003a00;
+  --primaryblue: #b99825;
+  --red: #be0f39;
+  --golden: #d4c17b;
+  --bg-color: #f6faff;
+  --primary: #f5952e;
+}
+.font-primary {
+  color: var(--primarydarkblue);
+}
+
+body {
+  margin: 0;
+  font-family: Roboto-regular !important;
+  transition: opacity 200ms;
+  position: relative;
+  font-family: Roboto-medium;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100vh;
+  background-color: var(--bg-color) !important;
+}
+
+.flex {
+  display: flex;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Search pdf viewer css */
+.rpv-search__highlights {
+  left: 0;
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+}
+.rpv-search__highlight {
+  background-color: var(--rpv-search__highlight-background-color);
+  border-radius: 0.25rem;
+  position: absolute;
+  z-index: 1;
+}
+.rpv-search__highlight--current {
+  background-color: var(--rpv-search__highlight-background-color) !important;
+}
+.rpv-search__popover {
+  padding: 0 0.5rem;
+}
+.rpv-search__popover-input-counter {
+  align-items: center;
+  display: flex;
+  margin-bottom: 0.5rem;
+  position: relative;
+  width: 12rem;
+}
+.rpv-search__popover-counter {
+  align-items: center;
+  bottom: 0;
+  display: flex;
+  position: absolute;
+  top: 0;
+}
+.rpv-search__popover-counter--ltr {
+  padding-right: 0.25rem;
+  right: 0;
+}
+.rpv-search__popover-counter--rtl {
+  left: 0;
+  padding-left: 0.25rem;
+}
+.rpv-search__popover-label {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  margin-bottom: 0.5rem;
+}
+.rpv-search__popover-label-checkbox {
+  cursor: pointer;
+  margin-right: 0.25rem;
+}
+.rpv-search__popover-footer {
+  align-items: center;
+  display: flex;
+}
+.rpv-search__popover-footer-item {
+  padding: 0 0.25rem;
+}
+.rpv-search__popover-footer-button--ltr {
+  margin-left: auto;
+}
+.rpv-search__popover-footer-button--rtl {
+  margin-right: auto;
+}
+:root {
+  --rpv-search__highlight-background-color: rgba(255, 255, 0, 0.4);
+  --rpv-search__highlight--current-background-color: rgba(0, 128, 0, 0.4);
+}
+/* Chat UI */
+.Composer-inputWrap {
+  font-family: Roboto-regular !important;
+  /* border: 1px solid var(--secondary); */
+  /* padding-top: 10px;
+  padding-bottom: 10px; */
+  font-size: 18px;
+  background: white;
+}
+.RichText {
+  font-family: Roboto-Regular !important;
+  font-size: 14px !important;
+}
+.QuickReply {
+  background: var(--primarydarkblue) !important;
+  color: white !important;
+  font-family: Roboto-regular !important;
+}
+li >  p {
+  margin-top: -25px !important;
+}
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-group input {
+  width: 300px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+
+
+

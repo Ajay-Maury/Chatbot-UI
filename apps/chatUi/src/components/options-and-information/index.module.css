@@ -1,0 +1,213 @@
+.option {
+  font-family: Roboto-regular;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0px;
+  text-align: center;
+  color: #29449c;
+  background-color: #fff9f5;
+  border-top: 1px solid #ff9a51;
+  padding-top: 16px;
+  cursor: pointer;
+}
+
+.option1 {
+  font-family: Roboto-regular;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0px;
+  text-align: center;
+  color: #29449c;
+  background-color: #fff9f5;
+  border-top: 2px solid #ff9a51;
+  padding-top: 16px;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.helperText {
+  color: #969696;
+  font-size: 10px;
+  font-family: Roboto-regular;
+  font-weight: 400;
+  margin-bottom: 10px;
+  margin-top: 5px;
+}
+
+.optionWithoutHelperText {
+  color: #333f51;
+  font-family: Segoe-regular;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  background-color: #fff9f5;
+  padding: 16px;
+  border-top: 2px solid #ff9a51;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.optionWithoutHelperText1 {
+  font-family: Roboto-regular;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0px;
+  text-align: center;
+  color: #29449c;
+  background-color: #fff9f5;
+  padding: 16px;
+  border-top: 2px solid #ff9a51;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.optionWithoutBorder {
+  color: #333f51;
+  font-family: Segoe-regular;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  background-color: #fff9f5;
+  padding: 16px;
+  cursor: pointer;
+}
+
+.optionTextBorder {
+  font-family: Roboto-regular;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0px;
+  text-align: center;
+  color: #29449c;
+  background-color: #fff9f5;
+  border-top: 2px solid #ff9a51;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.optionsBox {
+  max-height: 250px;
+  overflow-y: scroll;
+}
+
+.informationContainer {
+  border-radius: 10px;
+  box-shadow: #f29848 0px 1px 1px, #f29848 0px 0px 1px 1px;
+  margin: 6px 16px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 150px;
+  overflow-y: scroll;
+}
+
+.statementBoxWithBorder {
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+  background-color: #fff9f5;
+  padding: 8px;
+  border: 1px solid #4654660a;
+  border-radius: 5px;
+}
+
+.statementText,
+.statementValue {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0px;
+  text-align: center;
+  font-family: Roboto-regular;
+  color: #49454f;
+}
+
+.ratingContainer {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  padding: 16px;
+  border-top: 2px solid #ff9a51;
+  border-radius: 12px;
+}
+
+.dateHeading {
+  text-align: left;
+  font-family: Roboto-medium;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0px;
+  padding: 18px 16px;
+}
+
+.dateFieldContainer {
+  padding: 0px 16px 18px 16px;
+}
+
+.dateButton {
+  display: flex;
+  justify-content: end;
+  gap: 10px;
+  padding: 0px 24px 16px 24px;
+}
+
+.dateButton div {
+  font-size: 16px;
+  font-family: Roboto-medium;
+  font-weight: 500;
+  color: #273388;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.dateOptionContainer {
+  border-radius: 20px;
+  border-top: 2px solid #ff9a51;
+}
+
+.orText {
+  font-family: Roboto-regular;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0px;
+  text-align: center;
+  color: #000000;
+  margin-bottom: 5px;
+}
+
+.skipContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 45px;
+  background: #fff;
+  box-shadow: 0px -3px 15px 0px rgba(0, 0, 0, 0.1);
+}
+
+.skipContainer > div:first-child {
+  color: #2b3f79;
+  font-family: Segoe-regular;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.skipContainer > div:nth-child(2) {
+  color: #ff476a;
+  font-family: Segoe-regular;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  cursor: pointer;
+}
