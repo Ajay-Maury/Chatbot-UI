@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
 import toast from "react-hot-toast";
-import {v4 as uuidv4 } from "uuid"
+import { v4 as uuidv4 } from "uuid";
 import Navbar from "../../components/navbar/Navbar";
-import axios from 'axios';
+import axios from "axios";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -16,7 +16,7 @@ const Login = () => {
     setFormError("");
 
     try {
-      const response = await axios.post('/api/login', {
+      const response = await axios.post("/api/login", {
         email,
         password,
       });
@@ -25,17 +25,16 @@ const Login = () => {
         setFormError(response.data.error);
       } else {
         // Save user data to local storage
-        console.log('response.data:', response.data)
-        const { id, first_name, last_name
-        } = response.data;
+        console.log("response.data:", response.data);
+        const { id, first_name, last_name } = response.data;
         const userData = {
-          userId:id,
-          userName:`${first_name} ${last_name}`,
+          userId: id,
+          userName: `${first_name} ${last_name}`,
           email,
         };
         toast.success("Login successful!");
-        localStorage.setItem('userData', JSON.stringify(userData));
-        localStorage.removeItem('conversation')
+        localStorage.setItem("userData", JSON.stringify(userData));
+        localStorage.setItem("conversation", JSON.stringify([]));
         router.push(`/chat/${uuidv4()}`); // Redirect after successful login
       }
     } catch (error) {
@@ -52,22 +51,12 @@ const Login = () => {
 
         <div style={{ marginBottom: "16px" }}>
           <label>Email:</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            style={{ width: "100%", padding: "8px", marginTop: "4px" }}
-          />
+          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} style={{ width: "100%", padding: "8px", marginTop: "4px" }} />
         </div>
 
         <div style={{ marginBottom: "16px" }}>
           <label>Password:</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            style={{ width: "100%", padding: "8px", marginTop: "4px" }}
-          />
+          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} style={{ width: "100%", padding: "8px", marginTop: "4px" }} />
         </div>
 
         {formError && <div style={{ color: "red", marginBottom: "16px" }}>{formError}</div>}
@@ -87,10 +76,7 @@ const Login = () => {
 
         <div style={{ marginTop: "16px", textAlign: "center" }}>
           <span>Don't have an account? </span>
-          <a
-            href="/sign-in"
-            style={{ color: "#2b4078", cursor: "pointer", textDecoration: "underline" }}
-          >
+          <a href="/sign-in" style={{ color: "#2b4078", cursor: "pointer", textDecoration: "underline" }}>
             Sign In
           </a>
         </div>

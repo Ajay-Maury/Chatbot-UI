@@ -76,30 +76,33 @@ const ChatContext: FC<{
   const [initialDataLoading, setInitialDataLoaded] = useState(false);
   const router = useRouter();
   const { chatId } = router.query;
-  console.log("chatId:", chatId);
-
-  const fetchUserAndMessage = async () => {
-    const storedUserData = localStorage.getItem("userData") || "";
-    const parsedUserData = JSON.parse(storedUserData) || {};           
-    console.log("parsedUserData:", parsedUserData);
-    const userId = parsedUserData?.userId 
-    if ( (userId == userObjId)) {
-      setUserName(parsedUserData.userName);
-      setUserId(`${userId}`);
-    } else {
-      router.push("/login");
-    }
-
-    if (messages.length === 0 && localStorage.getItem("conversation")) {
-      const conversation = localStorage.getItem("conversation") || "";
-      setMessages(JSON.parse(conversation));
-    }
-    setInitialDataLoaded((pre) => !pre);
-  };
+  console.log("chatId=============:", chatId);
 
   useEffect(() => {
+    const fetchUserAndMessage = async () => {
+      const storedUserData = localStorage.getItem("userData");
+      const parsedUserData = storedUserData? JSON.parse(storedUserData || "") : {};
+      console.log("parsedUserData:", parsedUserData);
+      const userId = parsedUserData?.userId;
+
+      if (userId) {
+        setUserName(parsedUserData.userName);
+        setUserId(`${userId}`);
+      } else {
+        router.push("/login");
+      }
+  
+      // Fetch the conversation if available in localStorage
+      if (localStorage.getItem("conversation")) {
+        const conversation = localStorage.getItem("conversation") || "";
+        setMessages(JSON.parse(conversation));
+      }
+      setInitialDataLoaded((prev) => !prev);
+    };
+  
     fetchUserAndMessage();
-  }, [messages.length,chatId,userId]);
+  }, [chatId, userId, setMessages]); // Add dependencies for re-render
+  
 
   //@ts-ignore
   const sendMessage = useCallback(async (text: string, media: any) => {
@@ -125,7 +128,7 @@ const ChatContext: FC<{
         {
           user_id: Number(userId),
           text,
-          chat_id: uuidv4(),
+          chat_id: chatId,
         },
         {
           headers: {

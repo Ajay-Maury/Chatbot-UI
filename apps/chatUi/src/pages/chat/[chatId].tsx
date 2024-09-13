@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { AiOutlineWechat } from "react-icons/ai";
 import styles from "./index.module.css";
 import { Button } from "antd";
-import {v4 as uuidv4 } from "uuid"
+import { v4 as uuidv4 } from "uuid";
 import GptLogo from "../../assets/images/chat-gpt.png";
 import axios from "axios";
 import router from "next/router";
@@ -49,19 +49,15 @@ const ChatScreen = () => {
             position: "right",
           },
           {
-            message: message.result,
+            message: [message.result],
             position: "left",
             user: { avatar: GptLogo?.src },
           },
         ]);
 
-        // Clear existing conversation in localStorage
-        localStorage.removeItem("conversation");
-
         // Save transformed chats to localStorage
         localStorage.setItem("conversation", JSON.stringify(chats));
-        router.push(`/chat/${chatId}`)
-
+        router.push(`/chat/${chatId}`);
       }
     } catch (error) {
       console.error("Error fetching chat history:", error);
@@ -72,11 +68,11 @@ const ChatScreen = () => {
 
   // Use useEffect to call the function when the component mounts or when userId changes
   useEffect(() => {
-    const storedUserData = localStorage.getItem("userData") || "";
-    const parsedUserData = JSON.parse(storedUserData);
+    const storedUserData = localStorage.getItem("userData") || "[]";
+    const parsedUserData = JSON.parse(storedUserData) || {};
     const userId = parsedUserData?.userId;
 
-    if (parsedUserData && userId) {
+    if (userId) {
       getUserHistory(userId);
       handleHistoryChat(chatId as string);
     } else {
@@ -85,92 +81,95 @@ const ChatScreen = () => {
   }, [chatId]);
 
   const handleNewChat = () => {
-    localStorage.removeItem("conversation");
-    router.push(`/chat/${uuidv4()}`)
+    const storedChats = JSON.parse(localStorage.getItem("conversation") || "");
+    if (storedChats.length > 1) {
+      localStorage.setItem("conversation", JSON.stringify([]));
+      router.push(`/chat/${uuidv4()}`);
+    }
   };
 
   return (
     <>
-    <Navbar/>
-    <div className={styles.interviewScreenContainer}>
-      <div className={styles.interviewSideBarContainer}>
-        <div className={styles.interviewSideBar}>
-          <Button
-            onClick={handleNewChat}
-            style={{
-              border: "3px solid #E2E8F0",
-              width: "80%",
-              display: "flex",
-              background: "white",
-              alignItems: "center",
-              margin: "1rem",
-              borderRadius: "35px",
-              padding: "20px",
-            }}
-          >
-            <div style={{ paddingLeft: "15px", fontSize: "1.7rem" }}>
-              <AiOutlineWechat />
-            </div>
-            <div
+      <Navbar />
+      <div className={styles.interviewScreenContainer}>
+        <div className={styles.interviewSideBarContainer}>
+          <div className={styles.interviewSideBar}>
+            <Button
+              onClick={handleNewChat}
               style={{
-                paddingLeft: "15px",
-                fontSize: "1.05rem",
-                fontWeight: "650",
+                border: "3px solid #E2E8F0",
+                width: "80%",
+                display: "flex",
+                background: "white",
+                alignItems: "center",
+                margin: "1rem",
+                borderRadius: "35px",
+                padding: "20px",
               }}
             >
-              New Chat
-            </div>
-          </Button>
-          <hr />
+              <div style={{ paddingLeft: "15px", fontSize: "1.7rem" }}>
+                <AiOutlineWechat />
+              </div>
+              <div
+                style={{
+                  paddingLeft: "15px",
+                  fontSize: "1.05rem",
+                  fontWeight: "650",
+                }}
+              >
+                New Chat
+              </div>
+            </Button>
+            <hr />
 
-          <div>
-            <div style={{ textAlign: "center", marginTop: "5px" }}>
-              <b style={{ color: "white", fontSize: "1.5rem" }}>History</b>
-            </div>
             <div>
-              {loading ? (
-                <div style={{ color: "white", textAlign: "center" }}>Loading...</div>
-              ) : error ? (
-                <div style={{ color: "white", textAlign: "center" }}>{error}</div>
-              ) : chatHistory.length > 0 ? (
-                chatHistory.map((data: any) => (
-                  <Button
-                    onClick={() => handleHistoryChat(data.chat_id)}
-                    key={data.chat_id} // Add a unique key for each mapped element
-                    style={{
-                      border: "3px solid #E2E8F0",
-                      width: "95%",
-                      display: "flex",
-                      background: "white",
-                      margin: "10px 5px",
-                      borderRadius: "35px",
-                      fontSize: "1rem",
-                      fontWeight: "600",
-                      alignItems: "center",
-                    }}
-                  >
-                    <div
+              <div style={{ textAlign: "center", marginTop: "5px" }}>
+                <b style={{ color: "white", fontSize: "1.5rem" }}>History</b>
+              </div>
+              <div>
+                {loading ? (
+                  <div style={{ color: "white", textAlign: "center" }}>Loading...</div>
+                ) : error ? (
+                  <div style={{ color: "white", textAlign: "center" }}>{error}</div>
+                ) : chatHistory.length > 0 ? (
+                  chatHistory.map((data: any) => (
+                    <Button
+                      onClick={() => handleHistoryChat(data.chat_id)}
+                      key={data.chat_id} // Add a unique key for each mapped element
                       style={{
-                        whiteSpace: "nowrap",
-                        textOverflow: "ellipsis",
-                        overflow: "hidden",
+                        border: "3px solid #E2E8F0",
+                        width: "95%",
+                        display: "flex",
+                        background: "white",
+                        margin: "10px 5px",
+                        borderRadius: "35px",
+                        fontSize: "1rem",
+                        fontWeight: "600",
+                        alignItems: "center",
                       }}
                     >
-                      {data.chat_label || data.chat_id}
-                    </div>
-                  </Button>
-                ))
-              ) : (
-                <div style={{ color: "white", textAlign: "center" }}>No chat history available</div>
-              )}
+                      <div
+                        style={{
+                          whiteSpace: "nowrap",
+                          textOverflow: "ellipsis",
+                          overflow: "hidden",
+                        }}
+                      >
+                        {data.chat_label || data.chat_id}
+                      </div>
+                    </Button>
+                  ))
+                ) : (
+                  <div style={{ color: "white", textAlign: "center" }}>No chat history available</div>
+                )}
+              </div>
             </div>
           </div>
         </div>
+        <div style={{ width: "80%" }}>
+          <ChatUiWindow />
+        </div>
       </div>
-      <div style={{ width: "80%" }}>
-        <ChatUiWindow />
-      </div>
-    </div>
     </>
   );
 };
