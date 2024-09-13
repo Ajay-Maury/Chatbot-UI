@@ -19,7 +19,7 @@ const UserSelect = ({
   logo,
 }: PropsType) => {
   return (
-    <div style={{ padding: '6px 1px',margin:"10px 30px 10px 30px" }}>
+    <div style={{ padding: '6px 1px',margin:"0px 10px" }}>
       <div
         style={{ padding: "4px", display: "flex",overflow: "hidden", border: '1px solid #E3E7EF', borderRadius: "25px", backgroundColor: "#FFFFFF" }}>
         <div

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
 import toast from "react-hot-toast";
+import {v4 as uuidv4 } from "uuid"
 import Navbar from "../../components/navbar/Navbar";
 import axios from 'axios';
 
@@ -25,17 +26,17 @@ const Login = () => {
       } else {
         // Save user data to local storage
         console.log('response.data:', response.data)
-        const { id, firstName, lastName } = response.data;
+        const { id, first_name, last_name
+        } = response.data;
         const userData = {
           userId:id,
-          firstName,
-          lastName,
+          userName:`${first_name} ${last_name}`,
           email,
         };
-        localStorage.setItem('userData', JSON.stringify(userData));
-
         toast.success("Login successful!");
-        router.push(`/chat/${id}`); // Redirect after successful login
+        localStorage.setItem('userData', JSON.stringify(userData));
+        localStorage.removeItem('conversation')
+        router.push(`/chat/${uuidv4()}`); // Redirect after successful login
       }
     } catch (error) {
       setFormError("An error occurred. Please try again.");

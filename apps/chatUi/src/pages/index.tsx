@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import LoadingScreen from "../components/loadingScreen/LoadingScreen";
 import Script from "next/script";
+import {v4 as uuidv4 } from "uuid"
 
 const Home: NextPage = () => {
   const router = useRouter();
@@ -20,7 +21,7 @@ const Home: NextPage = () => {
         localStorage.clear();
         router.push("/login");
       } else {
-        router.push(`chat/${userId}`);
+        router.push(`/chat/${uuidv4()}`); // Redirect after successful login
       }
     }
   }, [router]);

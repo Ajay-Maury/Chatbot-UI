@@ -1,0 +1,194 @@
+.interviewScreenContainer {
+  display: flex;
+  height: 100vh;
+  border: "1px solid red";
+}
+
+.interviewSideBarContainer {
+  height: 100vh;
+  background-color: #2b3f79;
+}
+
+.interviewSideBar {
+  background-color: #2b3f79;
+  width: 300px;
+  position: relative;
+  overflow-y: scroll;
+  height: 90%;
+  padding-bottom: 70px;
+}
+
+.startInterviewPageContainer {
+  background-image: url(../../assets/images/startInterviewBg.png);
+  height: 100vh;
+}
+
+.beReadyText {
+  text-align: center;
+  font-family: Segoe-regular;
+  font-size: 54px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  background: linear-gradient(90deg, #2b4078 0%, #5e8aff 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  width: 628px;
+  margin: auto;
+}
+
+.instructionContainer {
+  width: 75%;
+  flex-shrink: 0;
+  border-radius: 12px;
+  border: 2px solid #e5f2ff;
+  background: linear-gradient(180deg, #f1f8ff 0%, #fff 100%);
+  margin: auto;
+  padding: 30px 50px;
+}
+
+.instructionPopupContainer {
+  height: 50vh;
+  margin: auto;
+  padding: 10px 10px 10px 20px;
+  overflow-y: scroll;
+}
+
+.instruction {
+  color: #333f51;
+  font-family: Segoe-regular;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  text-decoration-line: underline;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.instructionList li {
+  color: #333f51;
+  text-align: justify;
+  font-family: Segoe-regular;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-bottom: 13px;
+}
+
+.startBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.clock {
+  border-radius: 8px;
+  background: #50b089;
+  box-shadow: 0px 1px 2px 0px rgba(105, 81, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-family: Segoe-regular;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 18px; /* 100% */
+  padding: 6px;
+  margin: 24px 0px 10px 0px;
+  gap: 16px;
+}
+
+.endTestBtn {
+  color: #ee574d;
+  font-family: Segoe-regular;
+  font-size: 17px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 18px;
+  border-radius: 8px;
+  border: 1px solid #ee574d;
+  background: #fff;
+  box-shadow: 0px 1px 2px 0px rgba(105, 81, 255, 0.05);
+  padding: 12px;
+  width: 100%;
+  cursor: pointer;
+  /* position: relative; */
+  /* z-index: 10; */
+}
+
+.endTestBtn:active {
+  opacity: 0.6;
+}
+
+.progressContainer {
+  width: 100%; /* Set your desired width */
+  height: 10px; /* Set your desired height */
+  background-color: #ffffff; /* Set container background color */
+  /* position: relative; */
+  margin-bottom: 30px;
+  border-radius: 10px;
+}
+
+.progressBar {
+  width: 0%;
+  height: 10px;
+  background-color: #50b089; /* Set progress bar color */
+  position: relative;
+  height: 10px;
+  border-radius: 10px;
+}
+
+.progressText {
+  position: absolute;
+  right: -20px;
+  bottom: -22px;
+  font-family: Segoe-regular;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 18px;
+  text-align: left;
+  color: #ffffff;
+}
+
+.interviewPerLabel {
+  font-family: Segoe-regular;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 24px;
+  text-align: left;
+  color: #ffffff;
+  text-align: center;
+}
+
+.popUpHeading {
+  font-family: Segoe-regular;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 29.26px;
+  text-align: left;
+  color: #2b4078;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.popUpText {
+  font-family: Segoe UI;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 28px;
+  text-align: center;
+  color: #333f51;
+  margin-bottom: 30px;
+}
+
+.buttonContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
