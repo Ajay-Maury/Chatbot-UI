@@ -27,7 +27,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       console.log('response chat:', response.data)
       res.status(response.status).json(response.data);
     } catch (error: any) {
-      console.error('Error in chat-history API route:', error);
+      // console.error('Error in chat-history API route:', error);
       res.status(error.response?.status || 500).json({ error: error.message });
     }
   } else {

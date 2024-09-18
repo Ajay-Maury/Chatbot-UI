@@ -45,7 +45,6 @@ const Login = () => {
   return (
     <>
       <Navbar />
-
       <div style={{ padding: "50px", maxWidth: "600px", margin: "auto" }}>
         <h2 style={{ textAlign: "center", margin: "auto", paddingBottom: "30px" }}>Log In</h2>
 

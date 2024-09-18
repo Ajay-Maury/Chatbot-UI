@@ -11,7 +11,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       // Call Django backend API for login/signup
       const response = await axios.post(
         `${backendBaseUrl}/api/login/`,
-        { email, password, firstName, lastName },
+        { email, password, first_name: firstName, last_name: lastName },
         {
           headers: {
             'Content-Type': 'application/json',
@@ -23,7 +23,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       console.log('response:', response)
       res.status(response.status).json(response.data);
     } catch (error:any) {
-      console.error('Error in login API route:', error);
+      // console.error('Error in login API route:', error);
       res.status(error.response?.status || 500).json({ error: error.message });
     }
   } else {

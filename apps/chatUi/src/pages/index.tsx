@@ -3,14 +3,27 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import LoadingScreen from "../components/loadingScreen/LoadingScreen";
-import Script from "next/script";
-import {v4 as uuidv4 } from "uuid"
+import { v4 as uuidv4 } from "uuid";
+import toast from "react-hot-toast";
+import axios from "axios";
 
 const Home: NextPage = () => {
   const router = useRouter();
 
+  const verifyUser = async (email: string) => {
+    try {
+      // Fetch chat data from the API
+      const { data } = await axios.post(`/api/verify-user`, { email });
+      console.log("data:", data);
+    } catch (error) {
+      toast.error("Error verifying user. Please login again!!");
+      console.error("Error verifying user:", error);
+      localStorage.clear();
+      router.push("/login");
+    }
+  };
+
   useEffect(() => {
-    const userId = localStorage.getItem("userId") || "";
     const storedUserData = localStorage.getItem("userData");
     if (!storedUserData) {
       localStorage.clear();
@@ -19,8 +32,9 @@ const Home: NextPage = () => {
       const userData = JSON.parse(storedUserData);
       if (userData?.userId === "") {
         localStorage.clear();
-        router.push("/login");
+        router.push("/sign-in");
       } else {
+        verifyUser(userData.email);
         router.push(`/chat/${uuidv4()}`); // Redirect after successful login
       }
     }
@@ -30,19 +44,6 @@ const Home: NextPage = () => {
       <Head>
         <title>Chat UI</title>
       </Head>
-      {/* Google tag (gtag.js) */}
-      <Script strategy="lazyOnload" async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_TRACKING_ID}`}></Script>
-      <Script id="google-analytics" strategy="lazyOnload">
-        {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', '${process.env.NEXT_PUBLIC_GA_TRACKING_ID}',{
-          page_path:window.location.pathname,
-          })
-        `}
-      </Script>
-
       <div>
         <LoadingScreen />
       </div>

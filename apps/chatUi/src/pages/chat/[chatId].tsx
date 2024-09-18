@@ -8,6 +8,7 @@ import GptLogo from "../../assets/images/chat-gpt.png";
 import axios from "axios";
 import router from "next/router";
 import Navbar from "../../components/navbar/Navbar";
+import toast from "react-hot-toast";
 
 const ChatUiWindow = dynamic(() => import("../../components/ChatWindow/ChatUiWindow"), { ssr: false });
 
@@ -27,7 +28,7 @@ const ChatScreen = () => {
       setChatHistory(data); // Update state with the fetched chat history
     } catch (error) {
       console.log("error:", error);
-      setError("Error fetching chat history");
+      setError("Chat history not found");
       console.error("Error fetching chat history:", error);
     } finally {
       setLoading(false);
@@ -66,6 +67,22 @@ const ChatScreen = () => {
     }
   };
 
+  const verifyUser = async (email:string) => {
+    setLoading(true);
+    try {
+      // Fetch chat data from the API
+      const { data } = await axios.post(`/api/verify-user`,{ email });
+      console.log('data:', data)
+    } catch (error) {
+      toast.error("Error verifying user. Please login again!!");
+      console.error("Error verifying user:", error);
+      localStorage.clear()
+      router.push('/login')
+    } finally {
+      setLoading(false);
+    }
+  }
+
   // Use useEffect to call the function when the component mounts or when userId changes
   useEffect(() => {
     const storedUserData = localStorage.getItem("userData") || "[]";
@@ -73,6 +90,7 @@ const ChatScreen = () => {
     const userId = parsedUserData?.userId;
 
     if (userId) {
+      verifyUser(parsedUserData.email)
       getUserHistory(userId);
       handleHistoryChat(chatId as string);
     } else {

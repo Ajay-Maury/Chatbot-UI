@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import toast from 'react-hot-toast';
 import Navbar from "../../components/navbar/Navbar";
 import axios from 'axios';
+import { v4 as uuidv4 } from "uuid";
 
 const SignIn = () => {
   const [firstName, setFirstName] = useState('');
@@ -45,13 +46,24 @@ const SignIn = () => {
       if (response.data.error) {
         setFormError(response.data.error);
       } else {
-        toast.success('User registered successfully! Redirecting to login page...');
-        setTimeout(() => {
-          router.push('/login');
-        }, 1000); // Delay before redirecting to allow toast message to show
+        const { id, first_name, last_name } = response.data;
+        const userData = {
+          userId: id,
+          userName: `${first_name} ${last_name}`,
+          email,
+        };
+        toast.success('User registered successfully!');
+        localStorage.setItem("userData", JSON.stringify(userData));
+        localStorage.setItem("conversation", JSON.stringify([]));
+        router.push(`/chat/${uuidv4()}`); // Redirect after successful login
       }
-    } catch (error) {
-      setFormError('An error occurred. Please try again.');
+    } catch (error:any) {
+      console.error("Error during sign-up:", error);  // Log the actual error
+      if (error.response && error.response.data && error.response.data.error) {
+        setFormError(error.response.data.error);
+      } else {
+        setFormError('An error occurred. Please try again.');
+      }
     }
   };
 
