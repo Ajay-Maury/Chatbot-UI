@@ -16,7 +16,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       }
 
       // Call Django backend API
-      const response = await axios.get(`${backendBaseUrl}/api/chat/${chat_id}`, {
+      const response = await axios.get(`${backendBaseUrl}/api/chat-messages/${chat_id}`, {
         headers: {
           "Content-Type": "application/json",
         },

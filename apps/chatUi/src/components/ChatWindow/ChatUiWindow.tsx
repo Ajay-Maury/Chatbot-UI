@@ -21,16 +21,10 @@ const OPENAI_API_KEY = process.env.NEXT_PUBLIC_OPENAI_API_KEY;
 openai.apiKey = OPENAI_API_KEY;
 
 const ChatUiWindow: React.FC = () => {
-  const { messages, sendMessage, isMsgReceiving, setMessages, setLocale, userName,loading } = useChatContext()
+  const { messages, sendMessage, isMsgReceiving, setMessages, setLocale, userName, loading, newChatLoading } = useChatContext()
   const [showRecording, setShowRecording] = useState(false)
   const t = useLocalization();
 
-  const name = "DIKSHA"
-  const designation = t('label.designation')
-  const placeholder = t('label.placeholder')
-  const refreshLabel = t('message.refresh_label')
-
-  const profileData = { name: name, rating: 4.5, designation: designation }
 
   console.log('messagess==========', messages)
 
@@ -90,7 +84,7 @@ const ChatUiWindow: React.FC = () => {
 
   const msgToRender = useMemo(() => {
     console.log('norma===============',normalizeMsgs)
-    return isMsgReceiving
+    return (isMsgReceiving || newChatLoading)
       ? [
         ...normalizeMsgs,
         {
@@ -100,7 +94,7 @@ const ChatUiWindow: React.FC = () => {
         },
       ]
       : normalizeMsgs;
-  }, [isMsgReceiving, normalizeMsgs]);
+  }, [isMsgReceiving, normalizeMsgs, newChatLoading]);
 
 
   // const onRefresh = () => {
@@ -133,7 +127,7 @@ const ChatUiWindow: React.FC = () => {
           recordingContent={RenderVoiceRecorder}
           recordingProps={{ sendMessage, setShowRecording, showRecording }}
           // isChatEnd={isChatEnd}
-          disableSend={loading}
+          disableSend={loading || newChatLoading}
           renderMessageContent={(props: any): ReactElement => (
             <ChatMessageItem
               key={props}

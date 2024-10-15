@@ -44,17 +44,30 @@ const ChatScreen = ({ userId }: { userId: number }) => {
       // localStorage.removeItem("conversation");
   
       // Transform messages to the desired format
-      const chats = data.messages.flatMap((message: any) => [
-        {
-          message: message.question,
-          position: "right",
-        },
-        {
-          message: message.result,
-          position: "left",
-          user: { avatar: GptLogo?.src }
+      const chats = data.messages.flatMap((message: any) => {
+        const chatEntries = [];
+      
+        // Check if user message is not empty
+        if (message.user) {
+          // Add the user's message
+          chatEntries.push({
+            message: message.user,
+            position: "right",
+          });
         }
-      ]);
+      
+        // Always add the coach's message if user message is not empty
+        if (message.coach) {
+          chatEntries.push({
+            message: [message.coach],
+            position: "left",
+            user: { avatar: GptLogo?.src }
+          });
+        }
+      
+        return chatEntries;
+      });
+      
 
       setChatData(chats)
   

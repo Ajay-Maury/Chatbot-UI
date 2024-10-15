@@ -20,12 +20,13 @@
 
 .navbarHeading {
   color: #e08d2d;
-  font-size: 20px;
-  font-weight: 500;
+  font-size: 45px !important;
+  font-weight: 600;
   font-family: Roboto-medium;
   line-height: 24px;
   letter-spacing: 0.01em;
   text-align: center;
+  width: 200px;
 }
 
 .chooseLanguageText {
