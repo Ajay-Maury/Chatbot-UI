@@ -26,7 +26,8 @@
     "**/*.ts",
     "**/*.tsx",
     "**/*.d.ts",
- "src/pages/camera.js", "src/components/MiddleSide/pdf-worker.js", "src/components/MiddleSide/pdf-viewer.js", "src/components/recorder/RenderVoiceRecorder.jsx", "src/components/chat/VideoRecording.jsx", "src/pages/_error.tsx"  ],
+    "src/components/recorder/RenderVoiceRecorder.jsx"
+  ],
   "exclude": [
     "node_modules"
   ],

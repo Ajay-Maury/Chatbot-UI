@@ -1,29 +1,22 @@
-import React from 'react'
-import styles from './index.module.css'
+import { Spin } from "antd";
+import React from "react";
+
 const LoadingScreen = () => {
-    return (
-        <div style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <div>
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-                    <div style={{ position: "relative" }}>
-                        <div className={styles.spinnerCircle}></div>
-                        <div className={styles.spinnerSpinner}></div>
-                    </div>
-                </div>
+  const contentStyle: React.CSSProperties = {
+    padding: 50,
+    background: "rgba(0, 0, 0, 0.05)",
+    borderRadius: 4,
+  };
 
-                <p
-                    style={{
-                        textAlign: "center",
-                        margin: '20px',
-                        fontFamily: "Segoe-regular",
-                        fontSize: '26px',
-                        fontWeight: 500
-                    }}>
-                    Loading...
-                </p>
-            </div>
-        </div>
-    )
-}
+  const content = <div style={contentStyle} />;
 
-export default LoadingScreen
+  return (
+    <div style={{ height: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <Spin tip="Loading" size="large">
+        {content}
+      </Spin>
+    </div>
+  );
+};
+
+export default LoadingScreen;

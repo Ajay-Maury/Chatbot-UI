@@ -1,5 +1,5 @@
 {
-  "name": "uci",
+  "name": "chat-bot",
   "version": "0.0.0",
   "private": true,
   "workspaces": [
@@ -29,7 +29,6 @@
   },
   "packageManager": "yarn@1.22.19",
   "dependencies": {
-    "@fingerprintjs/fingerprintjs": "^3.4.1",
-    "pdfjs-dist": "^3.4.120"
+    "@fingerprintjs/fingerprintjs": "^3.4.1"
   }
 }
