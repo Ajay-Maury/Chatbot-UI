@@ -1,4 +1,4 @@
-import React, { ReactElement, useCallback, useContext, useState, createContext, useEffect, FC } from "react";
+import React, { ReactElement, useCallback, useContext, useState, createContext, useEffect, FC, useRef } from "react";
 import { v4 as uuidv4 } from "uuid";
 import GptLogo from "../assets/images/chat-gpt.png";
 import { IntlProvider } from "react-intl";
@@ -11,6 +11,7 @@ type ContextType = {
   messages: any[];
   setMessages: React.Dispatch<React.SetStateAction<string[]>>;
   loading: boolean;
+  newChatLoading: boolean;
   setLoading: (arg: boolean) => void;
   isMsgReceiving: boolean;
   setIsMsgReceiving: (arg: boolean) => void;
@@ -27,6 +28,7 @@ const initialContextValue: ContextType = {
   messages: [],
   setMessages: () => {},
   loading: false,
+  newChatLoading: false,
   setLoading: () => {},
   isMsgReceiving: false,
   setIsMsgReceiving: () => {},
@@ -74,6 +76,10 @@ const ChatContext: FC<{
   const [userId, setUserId] = useState("");
   const [userName, setUserName] = useState("");
   const [initialDataLoading, setInitialDataLoaded] = useState(false);
+  const [newChatLoading, setNewChatLoading] = useState(false);
+  
+    // Store the controller reference in a ref to be able to cancel it later
+    const prevControllerRef = useRef<AbortController | null>(null);
   const router = useRouter();
   const { chatId } = router.query;
   console.log("chatId=============:", chatId);
@@ -104,21 +110,36 @@ const ChatContext: FC<{
   //@ts-ignore
   const sendMessage = useCallback(async (text: string, media: any) => {
     console.log("sendMessage text ---:", { text, media });
-
+  
+    // State updates for loading and receiving messages
     setIsMsgReceiving(true);
     setLoading(true);
-    //@ts-ignore
-    setMessages((prev: any) => [
-      ...prev.map((prevMsg: any) => ({ ...prevMsg })),
-      {
-        message: text,
-        position: "right",
-      },
-    ]);
-
+  
+    // Abort controller for cancelling the previous API request
+    const controller = new AbortController();
+    const signal = controller.signal;
+  
+    // Cancel the previous request if there is one
+    if (prevControllerRef.current) {
+      prevControllerRef.current.abort();
+    }
+  
+    // Update the ref with the new controller
+    prevControllerRef.current = controller;
+  
+    if (text) {
+      setMessages((prev: any) => [
+        ...prev.map((prevMsg: any) => ({ ...prevMsg })),
+        {
+          message: text,
+          position: "right",
+        },
+      ]);
+    }
+  
     console.log("messaging from the user");
     console.log(userId);
-
+  
     try {
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_BASE_URL}/api/chat/`,
@@ -131,63 +152,125 @@ const ChatContext: FC<{
           headers: {
             "Content-Type": "application/json",
           },
+          signal, // Pass the abort signal to the request
         }
       );
-
+  
       const data = response.data;
-      const respMsges = Array.isArray(data.result) ? data.result : [data.result];
-
+      const respMsges = Array.isArray(data.message) ? data.message : [data.message];
+  
       // Handle response here
-
       setMessages((prev: any) => [
         ...prev.map((prevMsg: any) => ({ ...prevMsg })),
         {
           message: respMsges,
           position: "left",
           user: { avatar: GptLogo?.src },
-          options: response.data.options || [],
-          prompt: response.data.prompt || "text_message",
+          options: response?.data?.options || [],
+          prompt: response?.data?.prompt || "text_message",
         },
       ]);
+      
       console.log(messages);
-      localStorage.setItem("conversation", JSON.stringify([...messages, { message: text, position: "right" }, { message: respMsges, position: "left", user: { avatar: GptLogo?.src } }]));
-      setIsMsgReceiving(false);
-      setLoading(false);
+  
+      if (text) {
+        localStorage.setItem("conversation", JSON.stringify([...messages, { message: text, position: "right" }, { message: respMsges, position: "left", user: { avatar: GptLogo?.src } }]));
+      } else {
+        localStorage.setItem("conversation", JSON.stringify([...messages, { message: respMsges, position: "left", user: { avatar: GptLogo?.src } }]));
+      }
+  
     } catch (error) {
       // Handle error here
-      setMessages((prev: any) => [
-        ...prev.map((prevMsg: any) => ({ ...prevMsg })),
-        {
-          message: ["Something went wrong, please paste the previous message and try again."],
-          position: "left",
-          user: { avatar: GptLogo?.src },
-        },
-      ]);
+      if (axios.isCancel(error)) {
+        console.log("Previous request canceled:", error.message);
+      } else {
+        setMessages((prev: any) => [
+          ...prev.map((prevMsg: any) => ({ ...prevMsg })),
+          {
+            message: ["Something went wrong, please paste the previous message and try again."],
+            position: "left",
+            user: { avatar: GptLogo?.src },
+          },
+        ]);
+        console.log(error);
+      }
+    } finally {
+      // Reset loading and receiving states
       setIsMsgReceiving(false);
       setLoading(false);
-      console.log(error);
     }
-  });
+  }, [userId, chatId]); // Add necessary dependencies
+  
 
   useEffect(() => {
-    if (userId && messages && messages.length == 0) {
-      setMessages((prev: any) => [
-        ...prev.map((prevMsg: any) => ({ ...prevMsg })),
-        {
-          message: [`Hello ${userName}, how can I help you?`],
-          position: "left",
-          user: { avatar: GptLogo?.src },
-        },
-      ]);
-    }
-  }, [initialDataLoading]);
-
+    const fetchChatMessages = async (controller: AbortController) => {
+      setNewChatLoading(true);
+      if (userId && messages && messages.length === 0) {
+        try {
+          const response = await axios.post(
+            `${process.env.NEXT_PUBLIC_BASE_URL}/api/chat/`,
+            {
+              user_id: Number(userId),
+              text: "",
+              chat_id: chatId,
+            },
+            {
+              headers: {
+                "Content-Type": "application/json",
+              },
+              signal: controller.signal, // Attach the AbortController's signal to the request
+            }
+          );
+  
+          const data = response.data;
+          console.log("chat -- data:", data);
+  
+          setMessages((prev: any) => [
+            ...prev.map((prevMsg: any) => ({ ...prevMsg })),
+            {
+              message: [data.message],
+              position: "left",
+              user: { avatar: GptLogo?.src },
+            },
+          ]);
+        } catch (error) {
+          if (axios.isCancel(error)) {
+            console.log("Previous request canceled", error.message);
+          } else {
+            setMessages((prev: any) => [
+              ...prev.map((prevMsg: any) => ({ ...prevMsg })),
+              {
+                message: [
+                  "Something went wrong, please paste the previous message and try again.",
+                ],
+                position: "left",
+                user: { avatar: GptLogo?.src },
+              },
+            ]);
+            console.error("Error fetching chat messages:", error);
+          }
+        }
+      }
+      setNewChatLoading(false);
+    };
+  
+    const controller = new AbortController(); // Create an AbortController
+  
+    fetchChatMessages(controller);
+  
+    // Cleanup function to cancel the previous request
+    return () => {
+      controller.abort(); // Cancel the request if a new one is made or component unmounts
+    };
+  }, [initialDataLoading, userId, messages, chatId]);
+  
   return (
     <ChatProvider.Provider
       value={{
         messages,
         setMessages,
         loading,
+        newChatLoading,
         setLoading,
         isMsgReceiving,
         setIsMsgReceiving,

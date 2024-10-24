@@ -7,4 +7,10 @@ module.exports = {
       rootDir: ["apps/*/"],
     },
   },
+  rules: {
+    // Disable specific rules
+    "react-hooks/exhaustive-deps": "off",   // Disable missing dependencies in useEffect
+    "react/no-unescaped-entities": "off",   // Disable unescaped entities in JSX
+    "@next/next/no-img-element": "off",     // Allow usage of <img> instead of <Image /> from next/image
+  },
 };

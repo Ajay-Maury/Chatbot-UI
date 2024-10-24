@@ -76,7 +76,7 @@ const Login = () => {
         <div style={{ marginTop: "16px", textAlign: "center" }}>
           <span>Don't have an account? </span>
           <a href="/sign-in" style={{ color: "#2b4078", cursor: "pointer", textDecoration: "underline" }}>
-            Sign In
+            Sign up
           </a>
         </div>
       </div>

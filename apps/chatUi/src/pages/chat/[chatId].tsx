@@ -9,6 +9,7 @@ import axios from "axios";
 import router from "next/router";
 import Navbar from "../../components/navbar/Navbar";
 import toast from "react-hot-toast";
+import { Alert, Flex, Spin } from 'antd';
 
 const ChatUiWindow = dynamic(() => import("../../components/ChatWindow/ChatUiWindow"), { ssr: false });
 
@@ -44,17 +45,29 @@ const ChatScreen = () => {
 
       if (data?.messages) {
         // Transform messages to the desired format
-        const chats = data.messages.flatMap((message: any) => [
-          {
-            message: message.question,
-            position: "right",
-          },
-          {
-            message: [message.result],
-            position: "left",
-            user: { avatar: GptLogo?.src },
-          },
-        ]);
+        const chats = data.messages.flatMap((message: any) => {
+          const chatEntries = [];
+        
+          // Check if user message is not empty
+          if (message.user) {
+            // Add the user's message
+            chatEntries.push({
+              message: message.user,
+              position: "right",
+            });
+          }
+
+          if (message.coach) {
+            chatEntries.push({
+              message: [message.coach],
+              position: "left",
+              user: { avatar: GptLogo?.src }
+            });
+          }
+        
+          return chatEntries;
+        });
+        
 
         // Save transformed chats to localStorage
         localStorage.setItem("conversation", JSON.stringify(chats));
@@ -89,17 +102,24 @@ const ChatScreen = () => {
     const parsedUserData = JSON.parse(storedUserData) || {};
     const userId = parsedUserData?.userId;
 
-    if (userId) {
-      verifyUser(parsedUserData.email)
-      getUserHistory(userId);
+    if(chatId){
       handleHistoryChat(chatId as string);
-    } else {
+    } 
+      if (userId) {
+        verifyUser(parsedUserData.email)
+        getUserHistory(userId);
+      }
+      else {
       router.push("/login");
     }
   }, [chatId]);
 
   const handleNewChat = () => {
+    console.log('--------------handleNewChat clicked-----------:')
+    
     const storedChats = JSON.parse(localStorage.getItem("conversation") || "");
+    console.log('storedChats:', storedChats)
+    console.log('storedChats.length:', storedChats.length)
     if (storedChats.length > 1) {
       localStorage.setItem("conversation", JSON.stringify([]));
       router.push(`/chat/${uuidv4()}`);
@@ -146,7 +166,10 @@ const ChatScreen = () => {
               </div>
               <div>
                 {loading ? (
-                  <div style={{ color: "white", textAlign: "center" }}>Loading...</div>
+                  // <div style={{ color: "white", textAlign: "center" }}>Loading...</div>
+                  <div style={{marginTop:"15%", width:"100%", display:"flex"}}>
+                    <Spin style={{margin:"auto"}} tip="Loading" size="large"></Spin>
+                  </div>
                 ) : error ? (
                   <div style={{ color: "white", textAlign: "center" }}>{error}</div>
                 ) : chatHistory.length > 0 ? (

@@ -7,6 +7,7 @@
   box-shadow: 0px 4px 14px 0px #00000040;
   z-index: 5;
   position: relative;
+  min-height: 60px;
   /* margin-bottom: 20px; */
 }
 
@@ -20,12 +21,13 @@
 
 .navbarHeading {
   color: #e08d2d;
-  font-size: 20px;
-  font-weight: 500;
+  font-size: 45px !important;
+  font-weight: 600;
   font-family: Roboto-medium;
   line-height: 24px;
   letter-spacing: 0.01em;
   text-align: center;
+  width: 200px;
 }
 
 .chooseLanguageText {

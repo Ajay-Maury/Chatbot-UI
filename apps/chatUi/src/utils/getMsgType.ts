@@ -4,7 +4,6 @@
 export const getMsgType = (msg: any): string => {
   console.log("gsm==========", msg);
   console.log('msg blob=====================',)
-  console.log('type of blob========================',msg?.message[0]?.type)
   if (msg?.imageUrl) return "image";
   if (msg?.videoUrl) return "video";
   if (msg?.audioUrl) return "audio";
