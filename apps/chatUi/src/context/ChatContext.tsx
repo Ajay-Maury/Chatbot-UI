@@ -142,7 +142,7 @@ const ChatContext: FC<{
   
     try {
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/chat/`,
+        `/api/chat/`,
         {
           user_id: Number(userId),
           text,
@@ -208,7 +208,7 @@ const ChatContext: FC<{
       if (userId && messages && messages.length === 0) {
         try {
           const response = await axios.post(
-            `${process.env.NEXT_PUBLIC_BASE_URL}/api/chat/`,
+            `/api/chat/`,
             {
               user_id: Number(userId),
               text: "",

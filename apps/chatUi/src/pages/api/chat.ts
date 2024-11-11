@@ -9,7 +9,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     try {
       // Call Django backend API
       const response = await axios.post(
-        `https://backend.hiacoach.com/api/chat/`,
+        `${backendBaseUrl}/api/chat/`,
         req.body,
         {
           headers: {
