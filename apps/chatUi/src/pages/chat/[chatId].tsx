@@ -29,7 +29,7 @@ const ChatScreen = () => {
       setChatHistory(data); // Update state with the fetched chat history
     } catch (error) {
       console.log("error:", error);
-      setError("Chat history not found");
+      setError("Previous interaction not found");
       console.error("Error fetching chat history:", error);
     } finally {
       setLoading(false);

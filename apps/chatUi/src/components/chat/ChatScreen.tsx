@@ -165,7 +165,7 @@ const ChatScreen = ({ userId }: { userId: number }) => {
                   </Button>
                 ))
               ) : (
-                <div style={{ color: "white", textAlign: "center" }}>No chat history available</div>
+                <div style={{ color: "white", textAlign: "center" }}>No previous session available</div>
               )}
             </div>
           </div>
