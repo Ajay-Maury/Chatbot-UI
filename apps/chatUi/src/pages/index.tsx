@@ -42,7 +42,7 @@ const Home: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Chat UI</title>
+        <title>HIA</title>
       </Head>
       <div>
         <LoadingScreen />

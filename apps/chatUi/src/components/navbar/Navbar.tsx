@@ -26,7 +26,7 @@ const Navbar = () => {
         <div className={styles.menuContainer}>{/*<Image src={Menu.src} height={25} width={25} alt='menu' className={styles.menu} />*/}</div>
         <div className={styles.navbarHeading}>
           {/* <Image src={logo} height={30} alt='logo' /> */}
-          <h3>Chat UI</h3>
+          <h3>HIA</h3>
         </div>
         <div onClick={() => setIsOpen(true)} style={{ cursor: "pointer" }}>
           {/*<Image src={NavIcon.src} height={24} width={24} alt='menu' className={styles.navIcon}/> */}
