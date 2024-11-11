@@ -121,7 +121,7 @@ const ChatScreen = ({ userId }: { userId: number }) => {
                 fontWeight: "650",
               }}
             >
-              New Chat
+              New Session
             </div>
           </Button>
           <hr />

@@ -155,14 +155,14 @@ const ChatScreen = () => {
                   fontWeight: "650",
                 }}
               >
-                New Chat
+                New Session
               </div>
             </Button>
             <hr />
 
             <div>
               <div style={{ textAlign: "center", marginTop: "5px" }}>
-                <b style={{ color: "white", fontSize: "1.5rem" }}>Previous Converstions</b>
+                <b style={{ color: "white", fontSize: "1.5rem" }}>Previous Session</b>
               </div>
               <div>
                 {loading ? (
