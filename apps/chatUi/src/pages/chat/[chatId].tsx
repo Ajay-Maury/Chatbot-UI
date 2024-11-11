@@ -162,7 +162,7 @@ const ChatScreen = () => {
 
             <div>
               <div style={{ textAlign: "center", marginTop: "5px" }}>
-                <b style={{ color: "white", fontSize: "1.5rem" }}>History</b>
+                <b style={{ color: "white", fontSize: "1.5rem" }}>Previous Converstions</b>
               </div>
               <div>
                 {loading ? (
